@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9c668023b4395e94898abc92d31592ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Tile/2x2Tile.prefab
+  uploadId: 269083

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc5082e91ee3b0c4088203bc546f9524
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Tile/Coin.prefab
+  uploadId: 269083

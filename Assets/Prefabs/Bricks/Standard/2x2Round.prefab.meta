@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c78bcf4691afc3b4dbfe19a40b461f39
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Standard/2x2Round.prefab
+  uploadId: 269083

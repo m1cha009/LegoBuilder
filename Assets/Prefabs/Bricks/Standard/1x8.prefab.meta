@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d57737bba37837409eb7c288fe92e43
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Standard/1x8.prefab
+  uploadId: 269083

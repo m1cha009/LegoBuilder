@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f541d1f7c3a6b954c81bc81dab82415c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Scripts/BrickStats.cs
+  uploadId: 269083

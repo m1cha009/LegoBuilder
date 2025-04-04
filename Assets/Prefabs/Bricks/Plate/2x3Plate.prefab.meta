@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 610e8b70107eed9499933bed4816af28
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Plate/2x3Plate.prefab
+  uploadId: 269083

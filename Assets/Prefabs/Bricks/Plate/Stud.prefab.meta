@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 37233ba57ff452e4cbd739c31d00bead
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Plate/Stud.prefab
+  uploadId: 269083

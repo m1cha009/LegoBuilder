@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a3c468af2d4695340b35bf2ba926ea2c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Plate/1x6Plate.prefab
+  uploadId: 269083

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f46eff150f2fd0e43a097ec97d7ffd0e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Standard/1x2SlopeB.prefab
+  uploadId: 269083

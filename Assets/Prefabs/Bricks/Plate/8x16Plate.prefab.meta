@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 35b46ec5b5bc77c4f9022c6182f68412
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Plate/8x16Plate.prefab
+  uploadId: 269083

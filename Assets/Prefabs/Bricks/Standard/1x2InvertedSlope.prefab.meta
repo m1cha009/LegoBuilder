@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bf9ab5347e63ae84f8343fed5498e5e5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Standard/1x2InvertedSlope.prefab
+  uploadId: 269083

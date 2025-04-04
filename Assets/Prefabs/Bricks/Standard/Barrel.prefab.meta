@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e2762190e0908fa42bc834415ff5bb6a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Standard/Barrel.prefab
+  uploadId: 269083

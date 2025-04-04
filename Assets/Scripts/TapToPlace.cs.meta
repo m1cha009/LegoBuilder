@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9bd097af57be88f49bf20e877ea3e07c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Scripts/TapToPlace.cs
+  uploadId: 269083

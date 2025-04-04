@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dde8e01c19df778409ef1db4f8abe9a5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128980
+  packageName: Bricks Free CGS
+  packageVersion: 1.0
+  assetPath: Assets/Bricks/Prefabs/Bricks/Plate/4x12Plate.prefab
+  uploadId: 269083
