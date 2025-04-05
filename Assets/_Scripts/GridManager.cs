@@ -35,6 +35,11 @@ namespace BrickBuilder
 		
 			if (Physics.Raycast(ray, out RaycastHit hitInfo))
 			{
+				if (hitInfo.collider != _gridCollider)
+				{
+					return;
+				}
+				
 				var localPoint = hitInfo.transform.InverseTransformPoint(hitInfo.point);
 
 				var gridCellPosition = new Vector2Int(
