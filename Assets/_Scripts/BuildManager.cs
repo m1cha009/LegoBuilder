@@ -27,6 +27,12 @@ namespace BrickBuilder
 		
 			if (Physics.Raycast(ray, out RaycastHit hitInfo))
 			{
+				hitInfo.collider.gameObject.TryGetComponent(out Brick hitBrick);
+				if (hitBrick == null)
+				{
+					return;
+				}
+				
 				if (Mathf.Abs(hitInfo.normal.y) < 0.9f) // only top/bottom is checked
 				{
 					return;
@@ -35,8 +41,6 @@ namespace BrickBuilder
 				var x = Mathf.RoundToInt(hitInfo.point.x / _gridCellSize) * _gridCellSize;
 				var z = Mathf.RoundToInt(hitInfo.point.z / _gridCellSize) * _gridCellSize;
 
-				var hitBrick = hitInfo.collider.gameObject.GetComponent<Brick>();
-				
 				_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y + hitBrick.GetBrickHeight(), z);
 				
 				if (Keyboard.current.rKey.wasPressedThisFrame)
