@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 33621611788549640}
   - component: {fileID: 23068142973579020}
   - component: {fileID: 65087614377419694}
-  - component: {fileID: 54369706664784972}
-  - component: {fileID: 114208471686543430}
+  - component: {fileID: 3635257888145431886}
   m_Layer: 11
   m_Name: 1x3Plate
   m_TagString: Untagged
@@ -67,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aa47ebe1dcac5e447841eff1d3c04734, type: 2}
+  - {fileID: 2100000, guid: 9829d42846e75b8428624f812fa8ab51, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,34 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8000015, y: 0.49000007, z: 2.4}
   m_Center: {x: 0, y: -0.074999996, z: -0.8}
---- !u!54 &54369706664784972
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998970923768076}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
---- !u!114 &114208471686543430
+--- !u!114 &3635257888145431886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1998970923768076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f541d1f7c3a6b954c81bc81dab82415c, type: 3}
+  m_Script: {fileID: 11500000, guid: d4b61e88e39f4f98a2489b5090f99ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickHeight: 0.32
+  _brickHeight: 0.32
