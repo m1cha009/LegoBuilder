@@ -8,10 +8,12 @@ namespace BrickBuilder
 		[SerializeField] private Camera _mainCamera;
 		[SerializeField] private Brick _buildingPlane;
 		[SerializeField] private float _gridCellSize;
-
 		[SerializeField] private Brick _brickPrefab;
 		
+		private const string OpacityPropertyName = "_Opacity";
+		
 		private Brick _brickPreview;
+		private Renderer _renderer;
 
 		private void Start()
 		{
@@ -52,6 +54,8 @@ namespace BrickBuilder
 					var builtBrick = Instantiate(_brickPrefab, _buildingPlane.transform);
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
 					builtBrick.transform.rotation = _brickPreview.transform.rotation;
+					var ren = builtBrick.GetComponent<Renderer>();
+					ren.material.SetFloat(OpacityPropertyName, 1);
 				}
 			}
 
