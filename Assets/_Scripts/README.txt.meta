@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: f597351edb6beb14bad3997a752b0f39
-NativeFormatImporter:
+guid: d6c9b56ccecf4f4438aa62b4217ec892
+TextScriptImporter:
   externalObjects: {}
-  mainObjectFileID: 100100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +10,5 @@ AssetOrigin:
   productId: 128980
   packageName: Bricks Free CGS
   packageVersion: 1.0
-  assetPath: Assets/Bricks/Prefabs/Bricks/Plate/16x16Plate.prefab
+  assetPath: Assets/Bricks/README.txt
   uploadId: 269083

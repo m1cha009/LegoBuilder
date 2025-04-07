@@ -6,14 +6,14 @@ namespace BrickBuilder
 	public class BuildManager : MonoBehaviour
 	{
 		[SerializeField] private Camera _mainCamera;
-		[SerializeField] private Brick _buildingPlane;
+		[SerializeField] private BrickStats _buildingPlane;
 		[SerializeField] private float _gridCellSize;
-		[SerializeField] private Brick _brickPrefab;
+		[SerializeField] private BrickStats _brickPrefab;
 		
 		private const string OpacityPropertyName = "_Opacity";
 		private const string IgnoreLayerName = "Ignore Raycast";
 		
-		private Brick _brickPreview;
+		private BrickStats _brickPreview;
 		private BoxCollider _brickPreviewCollider;
 		private readonly Collider[] _previewHitColliders = new Collider[10];
 		private Renderer _renderer;
@@ -33,7 +33,7 @@ namespace BrickBuilder
 		
 			if (Physics.Raycast(ray, out RaycastHit hitInfo))
 			{
-				hitInfo.collider.gameObject.TryGetComponent(out Brick hitBrick);
+				hitInfo.collider.gameObject.TryGetComponent(out BrickStats hitBrick);
 				if (hitBrick == null)
 				{
 					return;

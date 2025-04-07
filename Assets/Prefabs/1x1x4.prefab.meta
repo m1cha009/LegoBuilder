@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a08ebcb527cd7e44a150d2d8e03078d
+guid: 7da5b0c345171c846b1e29e6e804b2b2
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 100100000
@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 128980
   packageName: Bricks Free CGS
   packageVersion: 1.0
-  assetPath: Assets/Prefabs/Bricks/Standard/1x2.prefab
+  assetPath: Assets/Prefabs/1x1x4.prefab
   uploadId: 269083

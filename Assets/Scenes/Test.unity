@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 1270706765}
-  _buildingPlane: {fileID: 1240433404}
+  _buildingPlane: {fileID: 1275164871}
   _gridCellSize: 0.8
-  _brickPrefab: {fileID: 3635257888145431886, guid: 74639974a0dc57f44ac1b9969ec11660, type: 3}
+  _brickPrefab: {fileID: 114208471686543430, guid: 74639974a0dc57f44ac1b9969ec11660, type: 3}
 --- !u!4 &123824956
 Transform:
   m_ObjectHideFlags: 0
@@ -288,17 +288,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!114 &1240433404 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6435042579894780419, guid: f597351edb6beb14bad3997a752b0f39, type: 3}
-  m_PrefabInstance: {fileID: 1275164870}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b61e88e39f4f98a2489b5090f99ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1270706763
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +482,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f597351edb6beb14bad3997a752b0f39, type: 3}
+--- !u!114 &1275164871 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114975624302405788, guid: f597351edb6beb14bad3997a752b0f39, type: 3}
+  m_PrefabInstance: {fileID: 1275164870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f541d1f7c3a6b954c81bc81dab82415c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

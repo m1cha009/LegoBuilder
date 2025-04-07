@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 128980
   packageName: Bricks Free CGS
   packageVersion: 1.0
-  assetPath: Assets/Bricks/Prefabs/Bricks/Tile/2x4Tile.prefab
+  assetPath: Assets/Prefabs/Bricks/Tile/2x4Tile.prefab
   uploadId: 269083

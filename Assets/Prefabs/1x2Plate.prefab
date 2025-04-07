@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33267517852694342}
   - component: {fileID: 23433454088030590}
   - component: {fileID: 65446600406641710}
-  - component: {fileID: 3775667735023090385}
+  - component: {fileID: 114110877004360480}
   m_Layer: 11
   m_Name: 1x2Plate
   m_TagString: Untagged
@@ -103,13 +103,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.8000015, y: 0.49, z: 1.6}
   m_Center: {x: 0, y: -0.07499998, z: -0.40000004}
---- !u!114 &3775667735023090385
+--- !u!114 &114110877004360480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1310567378923792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b61e88e39f4f98a2489b5090f99ea8, type: 3}
+  m_Script: {fileID: 11500000, guid: f541d1f7c3a6b954c81bc81dab82415c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brickHeight: 0.32
+  brickHeight: 0.32

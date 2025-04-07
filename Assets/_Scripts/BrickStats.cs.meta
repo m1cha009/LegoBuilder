@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 7da5b0c345171c846b1e29e6e804b2b2
-NativeFormatImporter:
+guid: f541d1f7c3a6b954c81bc81dab82415c
+MonoImporter:
   externalObjects: {}
-  mainObjectFileID: 100100000
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +14,5 @@ AssetOrigin:
   productId: 128980
   packageName: Bricks Free CGS
   packageVersion: 1.0
-  assetPath: Assets/Bricks/Prefabs/Bricks/Tall/1x1x4.prefab
+  assetPath: Assets/Bricks/Scripts/BrickStats.cs
   uploadId: 269083
