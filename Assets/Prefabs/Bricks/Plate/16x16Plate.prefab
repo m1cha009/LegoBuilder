@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23280965259014248}
   - component: {fileID: 65667555677626702}
   - component: {fileID: 6435042579894780419}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: 16x16Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,11 +103,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.800001, y: 0.49000043, z: 12.8}
+  m_Size: {x: 12.800001, y: 0.1, z: 12.8}
   m_Center: {x: 6, y: -0.07500019, z: -6.0000005}
 --- !u!114 &6435042579894780419
 MonoBehaviour:
