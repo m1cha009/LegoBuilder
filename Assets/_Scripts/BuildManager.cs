@@ -16,10 +16,10 @@ namespace BrickBuilder
 		
 		private BrickStats _brickPreview;
 		private BoxCollider _brickPreviewCollider;
-		private readonly Collider[] _previewHitColliders = new Collider[10];
+		private readonly Collider[] _previewHitColliders = new Collider[8];
 		private Renderer _renderer;
 
-		private List<BrickStats> _bricks = new();
+		private readonly List<BrickStats> _bricks = new();
 
 		private void Start()
 		{
@@ -50,7 +50,7 @@ namespace BrickBuilder
 				{
 					return;
 				}
-
+				
 				if (Mathf.Abs(hitInfo.normal.y) < 0.9f) // only top/bottom is checked
 				{
 					return;
@@ -65,16 +65,18 @@ namespace BrickBuilder
 				{
 					_brickPreview.transform.Rotate(0, -90f, 0);
 				}
-				else if (Mouse.current.leftButton.wasPressedThisFrame)
+				
+				CheckForCollisions();
+				
+				if (Mouse.current.leftButton.wasPressedThisFrame)
 				{
 					var builtBrick = Instantiate(_brickPreview, _buildingPlane.transform);
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
 					builtBrick.transform.rotation = _brickPreview.transform.rotation;
+					builtBrick.gameObject.layer = 0;
 					var ren = builtBrick.GetComponent<Renderer>();
 					ren.material.SetFloat(OpacityPropertyName, 1);
 				}
-				
-				CheckForCollisions();
 			}
 		}
 
@@ -89,7 +91,6 @@ namespace BrickBuilder
 				halfExtents, 
 				_previewHitColliders
 			);
-			
 			
 			for (var i = 0; i < numColliders; i++)
 			{
@@ -134,13 +135,13 @@ namespace BrickBuilder
 				_brickPreview.transform.parent = transform;
 				_brickPreview.gameObject.SetActive(false);
 			}
-				
+			
 			_brickPreview = newBrick;
 			_brickPreview.transform.parent = _buildingPlane.transform;
 			_brickPreview.transform.localPosition = new Vector3(_brickPreview.transform.localPosition.x, _brickPreview.GetBrickHeight(), _brickPreview.transform.localPosition.z);
 			_brickPreviewCollider = _brickPreview.GetComponent<BoxCollider>();
 			_brickPreview.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
-				
+			
 			_brickPreview.gameObject.SetActive(true);
 		}
 		
