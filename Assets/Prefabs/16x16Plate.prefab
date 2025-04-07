@@ -107,7 +107,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.800001, y: 0.49000043, z: 12.8}
+  m_Size: {x: 12.800001, y: 0.1, z: 12.8}
   m_Center: {x: 6, y: -0.07500019, z: -6.0000005}
 --- !u!114 &114975624302405788
 MonoBehaviour:
@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f541d1f7c3a6b954c81bc81dab82415c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickHeight: 0.32
+  _brickHeight: 0.32

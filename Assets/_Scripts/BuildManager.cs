@@ -83,7 +83,7 @@ namespace BrickBuilder
 		private void CheckForCollisions()
 		{
 			var center = _brickPreview.transform.TransformPoint(_brickPreviewCollider.center);
-			var halfExtents = _brickPreviewCollider.size * 0.45f;
+			var halfExtents = _brickPreviewCollider.size * 0.49f;
 			var orientation = _brickPreview.transform.localRotation;
 			
 			var numColliders = Physics.OverlapBoxNonAlloc(
