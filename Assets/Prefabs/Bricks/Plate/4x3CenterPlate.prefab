@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 33954843669538110}
   - component: {fileID: 23935730295035212}
   - component: {fileID: 65862238958893182}
-  - component: {fileID: 54605011319716096}
   - component: {fileID: 114552927859626530}
   m_Layer: 11
   m_Name: 4x3CenterPlate
@@ -104,39 +103,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3.2000015, y: 0.48999995, z: 2.4000006}
   m_Center: {x: 1.1999999, y: -0.07499999, z: -0.80000025}
---- !u!54 &54605011319716096
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829908326165200}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!114 &114552927859626530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f541d1f7c3a6b954c81bc81dab82415c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickHeight: 0.32
+  _brickHeight: 0.32
