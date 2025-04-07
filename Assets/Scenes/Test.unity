@@ -151,7 +151,12 @@ MonoBehaviour:
   _mainCamera: {fileID: 1270706765}
   _buildingPlane: {fileID: 1275164871}
   _gridCellSize: 0.8
-  _brickPrefab: {fileID: 114227900158620548, guid: 7da5b0c345171c846b1e29e6e804b2b2, type: 3}
+  _brickPrefabs:
+  - {fileID: 114696835314483462, guid: 9d3135f4ee329a54b8e7bf9835e392ce, type: 3}
+  - {fileID: 114227900158620548, guid: 7da5b0c345171c846b1e29e6e804b2b2, type: 3}
+  - {fileID: 114955077975512924, guid: b35372d3092b53c4b8570879c6be8cae, type: 3}
+  - {fileID: 114110877004360480, guid: e9f1dd5ca3d15664782c771fa811533e, type: 3}
+  - {fileID: 114208471686543430, guid: 74639974a0dc57f44ac1b9969ec11660, type: 3}
 --- !u!4 &123824956
 Transform:
   m_ObjectHideFlags: 0

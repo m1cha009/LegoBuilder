@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +9,7 @@ namespace BrickBuilder
 		[SerializeField] private Camera _mainCamera;
 		[SerializeField] private BrickStats _buildingPlane;
 		[SerializeField] private float _gridCellSize;
-		[SerializeField] private BrickStats _brickPrefab;
+		[SerializeField] private List<BrickStats> _brickPrefabs;
 		
 		private const string OpacityPropertyName = "_Opacity";
 		private const string IgnoreLayerName = "Ignore Raycast";
@@ -18,16 +19,27 @@ namespace BrickBuilder
 		private readonly Collider[] _previewHitColliders = new Collider[10];
 		private Renderer _renderer;
 
+		private List<BrickStats> _bricks = new();
+
 		private void Start()
 		{
-			_brickPreview = Instantiate(_brickPrefab, _buildingPlane.transform);
-			_brickPreview.transform.localPosition = new Vector3(_brickPreview.transform.localPosition.x, _buildingPlane.GetBrickHeight(), _brickPreview.transform.localPosition.z);
-			_brickPreviewCollider = _brickPreview.GetComponent<BoxCollider>();
-			_brickPreview.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
+			foreach (var brickPrefab in _brickPrefabs)
+			{
+				var brick = Instantiate(brickPrefab, transform);
+				brick.gameObject.SetActive(false);
+				_bricks.Add(brick);
+			}
 		}
 
 		private void Update()
 		{
+			SelectBrick();
+
+			if (_brickPreview == null)
+			{
+				return;
+			}
+			
 			var mousePos = Mouse.current.position.ReadValue();
 			var ray = _mainCamera.ScreenPointToRay(mousePos);
 		
@@ -47,7 +59,7 @@ namespace BrickBuilder
 				var x = Mathf.RoundToInt(hitInfo.point.x / _gridCellSize) * _gridCellSize;
 				var z = Mathf.RoundToInt(hitInfo.point.z / _gridCellSize) * _gridCellSize;
 
-				_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y + hitBrick.GetBrickHeight(), z);
+				_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y + _brickPreview.GetBrickHeight(), z);
 				
 				if (Keyboard.current.rKey.wasPressedThisFrame)
 				{
@@ -55,7 +67,7 @@ namespace BrickBuilder
 				}
 				else if (Mouse.current.leftButton.wasPressedThisFrame)
 				{
-					var builtBrick = Instantiate(_brickPrefab, _buildingPlane.transform);
+					var builtBrick = Instantiate(_brickPreview, _buildingPlane.transform);
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
 					builtBrick.transform.rotation = _brickPreview.transform.rotation;
 					var ren = builtBrick.GetComponent<Renderer>();
@@ -88,6 +100,48 @@ namespace BrickBuilder
 			}
 			
 			DrawDebugBox(center, halfExtents, orientation, Color.red);
+		}
+
+		private void SelectBrick()
+		{
+			if (Keyboard.current.digit1Key.wasPressedThisFrame)
+			{
+				ConfigureBrickPreview(_bricks[0]);
+			}
+			else if (Keyboard.current.digit2Key.wasPressedThisFrame)
+			{
+				ConfigureBrickPreview(_bricks[1]);
+			}
+			else if (Keyboard.current.digit3Key.wasPressedThisFrame)
+			{
+				ConfigureBrickPreview(_bricks[2]);
+			}
+			else if (Keyboard.current.digit4Key.wasPressedThisFrame)
+			{
+				ConfigureBrickPreview(_bricks[3]);
+			}
+			else if (Keyboard.current.digit5Key.wasPressedThisFrame)
+			{
+				ConfigureBrickPreview(_bricks[4]);
+			}
+
+		}
+
+		private void ConfigureBrickPreview(BrickStats newBrick)
+		{
+			if (_brickPreview != null)
+			{
+				_brickPreview.transform.parent = transform;
+				_brickPreview.gameObject.SetActive(false);
+			}
+				
+			_brickPreview = newBrick;
+			_brickPreview.transform.parent = _buildingPlane.transform;
+			_brickPreview.transform.localPosition = new Vector3(_brickPreview.transform.localPosition.x, _brickPreview.GetBrickHeight(), _brickPreview.transform.localPosition.z);
+			_brickPreviewCollider = _brickPreview.GetComponent<BoxCollider>();
+			_brickPreview.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
+				
+			_brickPreview.gameObject.SetActive(true);
 		}
 		
 		void DrawDebugBox(Vector3 center, Vector3 halfExtents, Quaternion orientation, Color color, float duration = 0)
