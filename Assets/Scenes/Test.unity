@@ -151,6 +151,8 @@ MonoBehaviour:
   _mainCamera: {fileID: 1270706765}
   _buildingPlane: {fileID: 1275164871}
   _gridCellSize: 0.8
+  _previewAllowedColor: {r: 0.6666667, g: 0.6666667, b: 1, a: 1}
+  _previewDeniedColor: {r: 1, g: 0.34509805, b: 0.34509805, a: 1}
   _brickPrefabs:
   - {fileID: 114696835314483462, guid: 9d3135f4ee329a54b8e7bf9835e392ce, type: 3}
   - {fileID: 114955077975512924, guid: b35372d3092b53c4b8570879c6be8cae, type: 3}
@@ -379,8 +381,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270706763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.55615926, y: 0.010447654, z: -0.007039145, w: -0.83098036}
-  m_LocalPosition: {x: 4.6860166, y: 8.266845, z: -7.476609}
+  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
+  m_LocalPosition: {x: 5.74, y: 8.6, z: -11.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

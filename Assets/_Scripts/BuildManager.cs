@@ -6,18 +6,32 @@ namespace BrickBuilder
 {
 	public class BuildManager : MonoBehaviour
 	{
+		private enum PreviewState
+		{
+			None = 0,
+			Allowed = 1,
+			Denied = 2,
+		}
+		
 		[SerializeField] private Camera _mainCamera;
 		[SerializeField] private BrickStats _buildingPlane;
 		[SerializeField] private float _gridCellSize;
+		[SerializeField] private Color _previewAllowedColor;
+		[SerializeField] private Color _previewDeniedColor;
 		[SerializeField] private List<BrickStats> _brickPrefabs;
+
 		
 		private const string OpacityPropertyName = "_Opacity";
+		private const string ColorPropertyName = "_MyColor";
 		private const string IgnoreLayerName = "Ignore Raycast";
 		
 		private BrickStats _brickPreview;
-		private BoxCollider _brickPreviewCollider;
 		private readonly Collider[] _previewHitColliders = new Collider[8];
 		private Renderer _renderer;
+
+		private PreviewState _currentPreviewState = PreviewState.None;
+		private PreviewState _previousPreviewState = PreviewState.None;
+
 
 		private readonly List<BrickStats> _bricks = new();
 
@@ -26,6 +40,8 @@ namespace BrickBuilder
 			foreach (var brickPrefab in _brickPrefabs)
 			{
 				var brick = Instantiate(brickPrefab, transform);
+				brick.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
+				brick.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
 				brick.gameObject.SetActive(false);
 				_bricks.Add(brick);
 			}
@@ -65,25 +81,45 @@ namespace BrickBuilder
 				{
 					_brickPreview.transform.Rotate(0, -90f, 0);
 				}
+
+				var hasCollisions = HasCollisions();
+				_currentPreviewState = hasCollisions ? PreviewState.Denied : PreviewState.Allowed;
 				
-				CheckForCollisions();
-				
+				if (hasCollisions)
+				{
+					if (_currentPreviewState == _previousPreviewState)
+					{
+						return;
+					}
+					
+					_brickPreview.BrickRenderer.material.SetColor(ColorPropertyName, _previewDeniedColor);
+				}
+				else
+				{
+					if (_currentPreviewState != _previousPreviewState)
+					{
+						_brickPreview.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
+					}
+				}
+
+				_previousPreviewState = _currentPreviewState;
+
 				if (Mouse.current.leftButton.wasPressedThisFrame)
 				{
 					var builtBrick = Instantiate(_brickPreview, _buildingPlane.transform);
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
 					builtBrick.transform.rotation = _brickPreview.transform.rotation;
 					builtBrick.gameObject.layer = 0;
-					var ren = builtBrick.GetComponent<Renderer>();
-					ren.material.SetFloat(OpacityPropertyName, 1);
+					builtBrick.BrickRenderer.material.SetColor(ColorPropertyName, GetNewRandomColor());
+					builtBrick.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
 				}
 			}
 		}
 
-		private void CheckForCollisions()
+		private bool HasCollisions()
 		{
-			var center = _brickPreview.transform.TransformPoint(_brickPreviewCollider.center);
-			var halfExtents = _brickPreviewCollider.size * 0.49f;
+			var center = _brickPreview.transform.TransformPoint(_brickPreview.BrickCollider.center);
+			var halfExtents = _brickPreview.BrickCollider.size * 0.49f;
 			var orientation = _brickPreview.transform.localRotation;
 			
 			var numColliders = Physics.OverlapBoxNonAlloc(
@@ -92,15 +128,18 @@ namespace BrickBuilder
 				_previewHitColliders
 			);
 			
+			DrawDebugBox(center, halfExtents, orientation, Color.red);
+			
 			for (var i = 0; i < numColliders; i++)
 			{
 				if (_previewHitColliders[i].gameObject != _brickPreview.gameObject)
 				{
-					Debug.Log($"Hit: {_previewHitColliders[i].name}");
+					// Debug.Log($"Hit: {_previewHitColliders[i].name}");
+					return true;
 				}
 			}
 			
-			DrawDebugBox(center, halfExtents, orientation, Color.red);
+			return false;
 		}
 
 		private void SelectBrick()
@@ -139,10 +178,19 @@ namespace BrickBuilder
 			_brickPreview = newBrick;
 			_brickPreview.transform.parent = _buildingPlane.transform;
 			_brickPreview.transform.localPosition = new Vector3(_brickPreview.transform.localPosition.x, _brickPreview.GetBrickHeight(), _brickPreview.transform.localPosition.z);
-			_brickPreviewCollider = _brickPreview.GetComponent<BoxCollider>();
-			_brickPreview.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
 			
 			_brickPreview.gameObject.SetActive(true);
+		}
+
+		private Color GetNewRandomColor()
+		{
+			return new Color
+			{
+				r = Random.Range(0.0f, 1.0f),
+				g = Random.Range(0.0f, 1.0f),
+				b = Random.Range(0.0f, 1.0f),
+				a = 1.0f
+			};
 		}
 		
 		void DrawDebugBox(Vector3 center, Vector3 halfExtents, Quaternion orientation, Color color, float duration = 0)

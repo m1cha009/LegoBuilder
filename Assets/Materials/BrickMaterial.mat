@@ -60,13 +60,13 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
-    - _Fresnel_Power: 3
-    - _Metallic: 0.2
-    - _Opacity: 0.6
+    - _Fresnel_Power: 5
+    - _Metallic: 0.546
+    - _Opacity: 0.55
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.1
+    - _Smoothness: 0.4
     - _SrcBlend: 1
     - _Surface: 1
     - _Thickness: 1
@@ -76,6 +76,6 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _MyColor: {r: 0.92269707, g: 1, b: 0.061320737, a: 1}
+    - _MyColor: {r: 0.6666667, g: 0.6666667, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

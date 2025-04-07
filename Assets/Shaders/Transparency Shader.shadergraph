@@ -588,7 +588,7 @@
         "b": 0.40383589267730715,
         "a": 1.0
     },
-    "isMainColor": false,
+    "isMainColor": true,
     "m_ColorMode": 0
 }
 
