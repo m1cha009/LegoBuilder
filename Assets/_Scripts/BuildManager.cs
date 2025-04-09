@@ -72,6 +72,8 @@ namespace BrickBuilder
 					return;
 				}
 				
+				// Debug.Log($"Hit: {hitInfo.collider.name}");
+				
 				var x = Mathf.RoundToInt(hitInfo.point.x / _gridCellSize) * _gridCellSize;
 				var z = Mathf.RoundToInt(hitInfo.point.z / _gridCellSize) * _gridCellSize;
 
@@ -119,13 +121,14 @@ namespace BrickBuilder
 		private bool HasCollisions()
 		{
 			var center = _brickPreview.transform.TransformPoint(_brickPreview.BrickCollider.center);
-			var halfExtents = _brickPreview.BrickCollider.size * 0.49f;
-			var orientation = _brickPreview.transform.localRotation;
+			var halfExtents = _brickPreview.BrickCollider.size * 0.45f;
+			var orientation = _brickPreview.transform.rotation;
 			
 			var numColliders = Physics.OverlapBoxNonAlloc(
 				center, 
 				halfExtents, 
-				_previewHitColliders
+				_previewHitColliders,
+				orientation
 			);
 			
 			DrawDebugBox(center, halfExtents, orientation, Color.red);
