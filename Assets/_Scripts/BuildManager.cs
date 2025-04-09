@@ -72,12 +72,17 @@ namespace BrickBuilder
 					return;
 				}
 				
-				// Debug.Log($"Hit: {hitInfo.collider.name}");
-				
 				var x = Mathf.RoundToInt(hitInfo.point.x / _gridCellSize) * _gridCellSize;
 				var z = Mathf.RoundToInt(hitInfo.point.z / _gridCellSize) * _gridCellSize;
 
-				_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y + _brickPreview.GetBrickHeight(), z);
+				if (hitInfo.normal.y > 0)
+				{
+					_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y + _brickPreview.GetBrickHeight(), z);
+				}
+				else
+				{
+					_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y - _brickPreview.GetBrickHeight(), z);
+				}
 				
 				if (Keyboard.current.rKey.wasPressedThisFrame)
 				{
