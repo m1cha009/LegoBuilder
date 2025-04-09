@@ -445,17 +445,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: befd99b5aa7e494fa257814c5e33647f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingPlane: {fileID: 1275164875}
-  _orbitOffset: {x: 6, y: 0, z: -6}
-  _initialDistance: 10
+  _camera: {fileID: 1270706765}
+  _buildingLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _rotationSpeed: 100
+  _zoomSpeed: 15
+  _panSpeed: 10
   _minDistance: 5
   _maxDistance: 20
-  _rotationSpeed: 150
-  _zoomSpeed: 2
   _minVerticalAngle: 10
   _maxVerticalAngle: 80
   _requireRightMouseButton: 1
   _alternateRotateKey: 53
+  _panModifierKey: 51
 --- !u!1001 &1275164870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,11 +527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f541d1f7c3a6b954c81bc81dab82415c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1275164875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4963779077188236, guid: f597351edb6beb14bad3997a752b0f39, type: 3}
-  m_PrefabInstance: {fileID: 1275164870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
