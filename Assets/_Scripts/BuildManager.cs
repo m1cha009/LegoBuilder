@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace BrickBuilder
 {
@@ -32,8 +34,9 @@ namespace BrickBuilder
 		private PreviewState _currentPreviewState = PreviewState.None;
 		private PreviewState _previousPreviewState = PreviewState.None;
 
-
 		private readonly List<BrickStats> _bricks = new();
+
+		private float _brickRotationAngle = 0f;
 
 		private void Start()
 		{
@@ -62,8 +65,6 @@ namespace BrickBuilder
 			if (Physics.Raycast(ray, out RaycastHit hitInfo))
 			{
 				hitInfo.collider.gameObject.transform.parent.TryGetComponent(out BrickStats hitBrick);
-				
-				// hitInfo.collider.gameObject.TryGetComponent(out BrickStats hitBrick);
 				if (hitBrick == null)
 				{
 					return;
@@ -88,7 +89,13 @@ namespace BrickBuilder
 				
 				if (Keyboard.current.rKey.wasPressedThisFrame)
 				{
-					_brickPreview.transform.Rotate(0, -90f, 0);
+					_brickPreview.SetRotateAnimation(true);
+					_brickRotationAngle -= 90;
+
+					if (_brickRotationAngle <= -360)
+					{
+						_brickRotationAngle = 0;
+					}
 				}
 
 				var hasCollisions = HasCollisions();
@@ -117,8 +124,10 @@ namespace BrickBuilder
 				{
 					var builtBrick = Instantiate(_brickPreview, _buildingPlane.transform);
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
-					builtBrick.transform.rotation = _brickPreview.transform.rotation;
+					builtBrick.transform.eulerAngles = new Vector3(0, _brickRotationAngle, 0);
 					builtBrick.VisualObject.gameObject.layer = 0;
+					builtBrick.Animator.enabled = false;
+					builtBrick.VisualObject.transform.localRotation = Quaternion.identity;
 					builtBrick.BrickRenderer.material.SetColor(ColorPropertyName, GetNewRandomColor());
 					builtBrick.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
 				}
@@ -138,7 +147,7 @@ namespace BrickBuilder
 				orientation
 			);
 			
-			DrawDebugBox(center, halfExtents, orientation, Color.red);
+			// DrawDebugBox(center, halfExtents, orientation, Color.red);
 			
 			for (var i = 0; i < numColliders; i++)
 			{

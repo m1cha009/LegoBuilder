@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 3745683952066087921}
   - component: {fileID: 3735523176084158067}
   - component: {fileID: 3704938499008946099}
+  - component: {fileID: 4906923305742747379}
   m_Layer: 11
   m_Name: 2x2
   m_TagString: Untagged
@@ -154,3 +155,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6000016, y: 0.94984, z: 1.6000001}
   m_Center: {x: 0.39999998, y: -0.48661223, z: -0.39999998}
+--- !u!95 &4906923305742747379
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712946972811666109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d2965c5920b2c7438ca152efde03bb9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

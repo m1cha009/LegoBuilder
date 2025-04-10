@@ -12,6 +12,7 @@ namespace BrickBuilder
 		public BoxCollider BrickCollider { get; private set; }
 		public Renderer BrickRenderer { get; private set; }
 		public GameObject VisualObject { get; private set; }
+		public Animator Animator { get; private set; }
 		public float GetBrickHeight() => _brickHeight;
 
 		private void Awake()
@@ -19,6 +20,17 @@ namespace BrickBuilder
 			BrickCollider = GetComponentInChildren<BoxCollider>();
 			BrickRenderer = GetComponentInChildren<Renderer>();
 			VisualObject = transform.GetChild(0).gameObject;
+			Animator = GetComponentInChildren<Animator>();
+		}
+
+		public void SetRotateAnimation(bool value)
+		{
+			if (Animator == null)
+			{
+				return;
+			}
+			
+			Animator.SetBool("Rotate", value);
 		}
 	}
 }
