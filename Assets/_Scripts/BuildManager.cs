@@ -40,8 +40,8 @@ namespace BrickBuilder
 			foreach (var brickPrefab in _brickPrefabs)
 			{
 				var brick = Instantiate(brickPrefab, transform);
-				brick.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
 				brick.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
+				brick.SetLayer(LayerMask.NameToLayer(IgnoreLayerName));
 				brick.gameObject.SetActive(false);
 				_bricks.Add(brick);
 			}
@@ -61,7 +61,9 @@ namespace BrickBuilder
 		
 			if (Physics.Raycast(ray, out RaycastHit hitInfo))
 			{
-				hitInfo.collider.gameObject.TryGetComponent(out BrickStats hitBrick);
+				hitInfo.collider.gameObject.transform.parent.TryGetComponent(out BrickStats hitBrick);
+				
+				// hitInfo.collider.gameObject.TryGetComponent(out BrickStats hitBrick);
 				if (hitBrick == null)
 				{
 					return;
@@ -74,7 +76,7 @@ namespace BrickBuilder
 				
 				var x = Mathf.RoundToInt(hitInfo.point.x / _gridCellSize) * _gridCellSize;
 				var z = Mathf.RoundToInt(hitInfo.point.z / _gridCellSize) * _gridCellSize;
-
+				
 				if (hitInfo.normal.y > 0)
 				{
 					_brickPreview.transform.localPosition = new Vector3(x, hitInfo.transform.position.y + _brickPreview.GetBrickHeight(), z);
@@ -116,7 +118,7 @@ namespace BrickBuilder
 					var builtBrick = Instantiate(_brickPreview, _buildingPlane.transform);
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
 					builtBrick.transform.rotation = _brickPreview.transform.rotation;
-					builtBrick.gameObject.layer = 0;
+					builtBrick.VisualObject.gameObject.layer = 0;
 					builtBrick.BrickRenderer.material.SetColor(ColorPropertyName, GetNewRandomColor());
 					builtBrick.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
 				}
@@ -125,9 +127,9 @@ namespace BrickBuilder
 
 		private bool HasCollisions()
 		{
-			var center = _brickPreview.transform.TransformPoint(_brickPreview.BrickCollider.center);
+			var center = _brickPreview.VisualObject.transform.TransformPoint(_brickPreview.BrickCollider.center);
 			var halfExtents = _brickPreview.BrickCollider.size * 0.45f;
-			var orientation = _brickPreview.transform.rotation;
+			var orientation = _brickPreview.VisualObject.transform.rotation;
 			
 			var numColliders = Physics.OverlapBoxNonAlloc(
 				center, 
@@ -140,7 +142,7 @@ namespace BrickBuilder
 			
 			for (var i = 0; i < numColliders; i++)
 			{
-				if (_previewHitColliders[i].gameObject != _brickPreview.gameObject)
+				if (_previewHitColliders[i].gameObject != _brickPreview.VisualObject.gameObject)
 				{
 					// Debug.Log($"Hit: {_previewHitColliders[i].name}");
 					return true;
