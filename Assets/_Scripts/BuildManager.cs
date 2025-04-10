@@ -41,7 +41,7 @@ namespace BrickBuilder
 			{
 				var brick = Instantiate(brickPrefab, transform);
 				brick.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
-				brick.SetLayer(LayerMask.NameToLayer(IgnoreLayerName));
+				brick.VisualObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
 				brick.gameObject.SetActive(false);
 				_bricks.Add(brick);
 			}
