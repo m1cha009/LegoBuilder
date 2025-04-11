@@ -8,6 +8,7 @@ namespace BrickBuilder
 	public class SaveLoadSystem : MonoBehaviour
 	{
 		private string _savePath;
+		private string _test;
 
 		private void Awake()
 		{
