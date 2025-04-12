@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace BrickBuilder
@@ -9,8 +10,11 @@ namespace BrickBuilder
 		[Tooltip("Plates = .0032 | Regular = .0096 | 2xRegular = .0192 | 3xRegular = .0288 | 4xRegular = .0384")]
 		public float _brickHeight = 0.0032f;
 
+		public int Id { get; private set; }
 		public BoxCollider BrickCollider { get; private set; }
 		public Renderer BrickRenderer { get; private set; }
+
+		public Color BrickColor { get; set; }
 		public float GetBrickHeight() => _brickHeight;
 
 		private void Awake()

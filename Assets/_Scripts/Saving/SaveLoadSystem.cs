@@ -6,6 +6,8 @@ namespace BrickBuilder
 {
 	public class SaveLoadSystem : MonoBehaviour
 	{
+		[SerializeField] private BuildManager _buildManager;
+		
 		private string _savePath;
 
 		private void Awake()
@@ -18,9 +20,26 @@ namespace BrickBuilder
 			}
 		}
 
-		public void Save(string saveName, bool obfuscate, BrickSaveData bricksList)
+		public void SaveStructure(string saveName, bool obfuscate)
 		{
-			var json = JsonUtility.ToJson(bricksList, true);
+			var saveData = new BrickSaveData();
+
+			var builtStructure = _buildManager.GetBuiltStructure();
+
+			foreach (var brick in builtStructure)
+			{
+				var brickData = new BrickData()
+				{
+					PrefabName = brick.name.Replace("(Clone)", ""),
+					Position = brick.transform.localPosition,
+					Rotation = brick.transform.rotation,
+					Color = brick.BrickColor
+				};
+				
+				saveData.BricksDataList.Add(brickData);
+			}
+			
+			var json = JsonUtility.ToJson(saveData, true);
 			if (obfuscate)
 			{
 				json = ObfuscateJson(json);
@@ -32,15 +51,44 @@ namespace BrickBuilder
 			Debug.Log($"Structure saved to {fullPath}");
 		}
 
-		public BrickSaveData Load(string saveName, bool isObfuscated)
+		public void LoadStructure(string saveName, bool isObfuscated)
 		{
-			var json = File.ReadAllText(Path.Combine(_savePath, $"{saveName}.json"));
+			var loadPath = Path.Combine(_savePath, $"{saveName}.json");
+
+			if (!File.Exists(loadPath))
+			{
+				Debug.LogError($"File {loadPath} not found");
+				return;
+			}
+			
+			var json = File.ReadAllText(loadPath);
 			if (isObfuscated)
 			{
 				json = DeobfuscateJson(json);
 			}
 			
-			return JsonUtility.FromJson<BrickSaveData>(json);
+			var brickSaveData = JsonUtility.FromJson<BrickSaveData>(json);
+			
+			_buildManager.ClearStructure();
+
+			foreach (var brickData in brickSaveData.BricksDataList)
+			{
+				_buildManager.CreateBrickFromData(brickData.PrefabName, brickData.Position, brickData.Rotation, brickData.Color);
+			}
+			
+			Debug.Log($"Structure loaded from {loadPath}");
+		}
+
+		public string[] GetSaveFiles()
+		{
+			var files = Directory.GetFiles(_savePath, "*.json");
+
+			for (var i = 0; i < files.Length; i++)
+			{
+				files[i] = Path.GetFileNameWithoutExtension(files[i]);
+			}
+
+			return files;
 		}
 
 		private string ObfuscateJson(string jsonString)

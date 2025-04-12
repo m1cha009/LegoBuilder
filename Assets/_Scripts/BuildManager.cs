@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace BrickBuilder
 {
@@ -18,9 +21,8 @@ namespace BrickBuilder
 		[SerializeField] private float _gridCellSize;
 		[SerializeField] private Color _previewAllowedColor;
 		[SerializeField] private Color _previewDeniedColor;
-		[SerializeField] private List<BrickStats> _brickPrefabs;
+		[SerializeField] private AllBricksList _allBricksList;
 
-		
 		private const string OpacityPropertyName = "_Opacity";
 		private const string ColorPropertyName = "_MyColor";
 		private const string IgnoreLayerName = "Ignore Raycast";
@@ -32,18 +34,21 @@ namespace BrickBuilder
 		private PreviewState _currentPreviewState = PreviewState.None;
 		private PreviewState _previousPreviewState = PreviewState.None;
 
-
-		private readonly List<BrickStats> _bricks = new();
+		private Dictionary<string, BrickStats> _brickPrefabDict = new();
+		private readonly List<BrickStats> _previewBricksList = new();
+		private List<BrickStats> _builtBricksList = new();
 
 		private void Start()
 		{
-			foreach (var brickPrefab in _brickPrefabs)
+			foreach (var brickPrefab in _allBricksList.AllBricks)
 			{
 				var brick = Instantiate(brickPrefab, transform);
 				brick.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
 				brick.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
 				brick.gameObject.SetActive(false);
-				_bricks.Add(brick);
+				
+				_previewBricksList.Add(brick);
+				_brickPrefabDict.Add(brickPrefab.name, brick);
 			}
 		}
 
@@ -117,10 +122,51 @@ namespace BrickBuilder
 					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
 					builtBrick.transform.rotation = _brickPreview.transform.rotation;
 					builtBrick.gameObject.layer = 0;
-					builtBrick.BrickRenderer.material.SetColor(ColorPropertyName, GetNewRandomColor());
+
+					var color = GetNewRandomColor();
+					builtBrick.BrickColor = color;
+					builtBrick.BrickRenderer.material.SetColor(ColorPropertyName, color);
 					builtBrick.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
+					
+					_builtBricksList.Add(builtBrick);
 				}
 			}
+		}
+
+		public List<BrickStats> GetBuiltStructure()
+		{
+			return _builtBricksList;
+		}
+
+		public void ClearStructure()
+		{
+			var bricks = GetBuiltStructure();
+
+			foreach (var brick in bricks)
+			{
+				Destroy(brick.gameObject);
+			}
+			
+			_builtBricksList.Clear();
+		}
+
+		public void CreateBrickFromData(string prefabName, Vector3 position, Quaternion rotation, Color color)
+		{
+			if (!_brickPrefabDict.TryGetValue(prefabName, out var prefab))
+			{
+				Debug.LogError($"Prefab Instance ID: {prefabName} not found!");
+				return;
+			}
+			
+			var brickInstance = Instantiate(prefab, _buildingPlane.transform);
+			brickInstance.gameObject.SetActive(true);
+			brickInstance.transform.localPosition = position;
+			brickInstance.transform.rotation = rotation;
+			brickInstance.gameObject.layer = 0;
+			brickInstance.BrickRenderer.material.SetColor(ColorPropertyName, color);
+			brickInstance.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
+			
+			_builtBricksList.Add(brickInstance);
 		}
 
 		private bool HasCollisions()
@@ -154,23 +200,23 @@ namespace BrickBuilder
 		{
 			if (Keyboard.current.digit1Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_bricks[0]);
+				ConfigureBrickPreview(_previewBricksList[0]);
 			}
 			else if (Keyboard.current.digit2Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_bricks[1]);
+				ConfigureBrickPreview(_previewBricksList[1]);
 			}
 			else if (Keyboard.current.digit3Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_bricks[2]);
+				ConfigureBrickPreview(_previewBricksList[2]);
 			}
 			else if (Keyboard.current.digit4Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_bricks[3]);
+				ConfigureBrickPreview(_previewBricksList[3]);
 			}
 			else if (Keyboard.current.digit5Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_bricks[4]);
+				ConfigureBrickPreview(_previewBricksList[4]);
 			}
 
 		}

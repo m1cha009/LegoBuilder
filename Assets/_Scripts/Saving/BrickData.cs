@@ -6,9 +6,9 @@ namespace BrickBuilder
 	[Serializable]
 	public struct BrickData
 	{
-		public string prefabPath;
-		public Vector3 position;
-		public Quaternion rotation;
-		
+		public string PrefabName;
+		public Vector3 Position;
+		public Quaternion Rotation;
+		public Color Color;
 	}
 }
