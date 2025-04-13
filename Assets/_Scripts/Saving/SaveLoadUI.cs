@@ -9,18 +9,21 @@ namespace BrickBuilder
 	public class SaveLoadUI : MonoBehaviour
 	{
 		[SerializeField] private SaveLoadSystem _saveLoadSystem;
+		[SerializeField] private BuildManager _buildManager;
 		
 		[SerializeField] private TMP_InputField _nameInputField;
 		[SerializeField] private Button _saveButton;
 		[SerializeField] private Button _loadButton;
 		[SerializeField] private Button _refreshButton;
 		[SerializeField] private TMP_Dropdown _loadFilesDropdown;
+		[SerializeField] private Button _clearButton;
 
 		private void Awake()
 		{
 			_saveButton.onClick.AddListener(OnSaveButtonClicked);
 			_loadButton.onClick.AddListener(OnLoadButtonClicked);
 			_refreshButton.onClick.AddListener(OnRefreshButtonClicked);
+			_clearButton.onClick.AddListener(OnClearButtonClicked);
 		}
 
 		private void Start()
@@ -32,7 +35,8 @@ namespace BrickBuilder
 		{
 			_saveButton.onClick.RemoveListener(OnSaveButtonClicked);
 			_loadButton.onClick.RemoveListener(OnLoadButtonClicked);
-			_refreshButton.onClick.RemoveListener(OnLoadButtonClicked);
+			_refreshButton.onClick.RemoveListener(OnRefreshButtonClicked);
+			_clearButton.onClick.RemoveListener(OnClearButtonClicked);
 		}
 
 		private void OnLoadButtonClicked()
@@ -67,6 +71,11 @@ namespace BrickBuilder
 			
 			_loadFilesDropdown.ClearOptions();
 			_loadFilesDropdown.AddOptions(files.ToList());
+		}
+		
+		private void OnClearButtonClicked()
+		{
+			_buildManager.ClearStructure();
 		}
 	}
 }
