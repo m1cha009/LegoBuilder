@@ -33,7 +33,6 @@ namespace BrickBuilder
 					PrefabName = brick.name.Replace("(Clone)", ""),
 					Position = brick.transform.localPosition,
 					Rotation = brick.transform.rotation,
-					Color = brick.BrickColor
 				};
 				
 				saveData.BricksDataList.Add(brickData);
@@ -73,7 +72,7 @@ namespace BrickBuilder
 
 			foreach (var brickData in brickSaveData.BricksDataList)
 			{
-				_buildManager.CreateBrickFromData(brickData.PrefabName, brickData.Position, brickData.Rotation, brickData.Color);
+				_buildManager.CreateBrick(brickData.PrefabName, brickData.Position, brickData.Rotation);
 			}
 			
 			Debug.Log($"Structure loaded from {loadPath}");

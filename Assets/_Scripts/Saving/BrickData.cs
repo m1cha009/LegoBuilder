@@ -9,6 +9,5 @@ namespace BrickBuilder
 		public string PrefabName;
 		public Vector3 Position;
 		public Quaternion Rotation;
-		public Color Color;
 	}
 }

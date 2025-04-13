@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -23,8 +22,6 @@ namespace BrickBuilder
 		[SerializeField] private Color _previewDeniedColor;
 		[SerializeField] private AllBricksList _allBricksList;
 
-		private const string OpacityPropertyName = "_Opacity";
-		private const string ColorPropertyName = "_MyColor";
 		private const string IgnoreLayerName = "Ignore Raycast";
 		
 		private BrickStats _brickPreview;
@@ -34,22 +31,12 @@ namespace BrickBuilder
 		private PreviewState _currentPreviewState = PreviewState.None;
 		private PreviewState _previousPreviewState = PreviewState.None;
 
-		private Dictionary<string, BrickStats> _brickPrefabDict = new();
-		private readonly List<BrickStats> _previewBricksList = new();
-		private List<BrickStats> _builtBricksList = new();
+		private readonly Dictionary<string, BrickStats> _bricksPrefabDict = new();
+		private readonly List<BrickStats> _builtBricksList = new();
 
 		private void Start()
 		{
-			foreach (var brickPrefab in _allBricksList.AllBricks)
-			{
-				var brick = Instantiate(brickPrefab, transform);
-				brick.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
-				brick.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
-				brick.gameObject.SetActive(false);
-				
-				_previewBricksList.Add(brick);
-				_brickPrefabDict.Add(brickPrefab.name, brick);
-			}
+			SetupBrickPrefabs();
 		}
 
 		private void Update()
@@ -104,13 +91,13 @@ namespace BrickBuilder
 						return;
 					}
 					
-					_brickPreview.BrickRenderer.material.SetColor(ColorPropertyName, _previewDeniedColor);
+					_brickPreview.SetColor(_previewDeniedColor, true);
 				}
 				else
 				{
 					if (_currentPreviewState != _previousPreviewState)
 					{
-						_brickPreview.BrickRenderer.material.SetColor(ColorPropertyName, _previewAllowedColor);
+						_brickPreview.SetColor(_previewAllowedColor, true);
 					}
 				}
 
@@ -118,17 +105,9 @@ namespace BrickBuilder
 
 				if (Mouse.current.leftButton.wasPressedThisFrame)
 				{
-					var builtBrick = Instantiate(_brickPreview, _buildingPlane.transform);
-					builtBrick.transform.localPosition = _brickPreview.transform.localPosition;
-					builtBrick.transform.rotation = _brickPreview.transform.rotation;
-					builtBrick.gameObject.layer = 0;
-
-					var color = GetNewRandomColor();
-					builtBrick.BrickColor = color;
-					builtBrick.BrickRenderer.material.SetColor(ColorPropertyName, color);
-					builtBrick.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
+					var brickName = _brickPreview.name.Replace("(Clone)", "");
 					
-					_builtBricksList.Add(builtBrick);
+					CreateBrick(brickName, _brickPreview.transform.localPosition, _brickPreview.transform.rotation);
 				}
 			}
 		}
@@ -150,23 +129,32 @@ namespace BrickBuilder
 			_builtBricksList.Clear();
 		}
 
-		public void CreateBrickFromData(string prefabName, Vector3 position, Quaternion rotation, Color color)
+		public void CreateBrick(string prefabName, Vector3 position, Quaternion rotation)
 		{
-			if (!_brickPrefabDict.TryGetValue(prefabName, out var prefab))
+			if (!_bricksPrefabDict.TryGetValue(prefabName, out var prefab))
 			{
 				Debug.LogError($"Prefab Instance ID: {prefabName} not found!");
 				return;
 			}
 			
 			var brickInstance = Instantiate(prefab, _buildingPlane.transform);
-			brickInstance.gameObject.SetActive(true);
 			brickInstance.transform.localPosition = position;
 			brickInstance.transform.rotation = rotation;
 			brickInstance.gameObject.layer = 0;
-			brickInstance.BrickRenderer.material.SetColor(ColorPropertyName, color);
-			brickInstance.BrickRenderer.material.SetFloat(OpacityPropertyName, 1);
+			brickInstance.SetColor(prefab.BrickColor, false, 1f);
 			
 			_builtBricksList.Add(brickInstance);
+		}
+
+		private void SetupBrickPrefabs()
+		{
+			foreach (var brickPrefab in _allBricksList.AllBricks)
+			{
+				var color = GetNewRandomColor();
+				brickPrefab.SetColor(color, true);
+				
+				_bricksPrefabDict.Add(brickPrefab.name, brickPrefab);
+			}
 		}
 
 		private bool HasCollisions()
@@ -182,7 +170,7 @@ namespace BrickBuilder
 				orientation
 			);
 			
-			DrawDebugBox(center, halfExtents, orientation, Color.red);
+			// DrawDebugBox(center, halfExtents, orientation, Color.red);
 			
 			for (var i = 0; i < numColliders; i++)
 			{
@@ -200,40 +188,46 @@ namespace BrickBuilder
 		{
 			if (Keyboard.current.digit1Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_previewBricksList[0]);
+				ConfigureBrickPreview(_bricksPrefabDict.Values.ToList()[0]);
 			}
 			else if (Keyboard.current.digit2Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_previewBricksList[1]);
+				ConfigureBrickPreview(_bricksPrefabDict.Values.ToList()[1]);
 			}
 			else if (Keyboard.current.digit3Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_previewBricksList[2]);
+				ConfigureBrickPreview(_bricksPrefabDict.Values.ToList()[2]);
 			}
 			else if (Keyboard.current.digit4Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_previewBricksList[3]);
+				ConfigureBrickPreview(_bricksPrefabDict.Values.ToList()[3]);
 			}
 			else if (Keyboard.current.digit5Key.wasPressedThisFrame)
 			{
-				ConfigureBrickPreview(_previewBricksList[4]);
+				ConfigureBrickPreview(_bricksPrefabDict.Values.ToList()[4]);
 			}
 
 		}
 
 		private void ConfigureBrickPreview(BrickStats newBrick)
 		{
+			var position = Vector3.zero;
+			var rotation = Quaternion.identity;
+			
 			if (_brickPreview != null)
 			{
-				_brickPreview.transform.parent = transform;
-				_brickPreview.gameObject.SetActive(false);
+				position = _brickPreview.transform.localPosition;
+				rotation = _brickPreview.transform.rotation;
+				
+				Destroy(_brickPreview.gameObject);
+				_brickPreview = null;
 			}
 			
-			_brickPreview = newBrick;
-			_brickPreview.transform.parent = _buildingPlane.transform;
-			_brickPreview.transform.localPosition = new Vector3(_brickPreview.transform.localPosition.x, _brickPreview.GetBrickHeight(), _brickPreview.transform.localPosition.z);
-			
-			_brickPreview.gameObject.SetActive(true);
+			_brickPreview = Instantiate(newBrick, _buildingPlane.transform);
+			_brickPreview.gameObject.layer = LayerMask.NameToLayer(IgnoreLayerName);
+			_brickPreview.SetColor(_previewDeniedColor, true);
+			_brickPreview.transform.localPosition = position;
+			_brickPreview.transform.rotation = rotation;
 		}
 
 		private Color GetNewRandomColor()
