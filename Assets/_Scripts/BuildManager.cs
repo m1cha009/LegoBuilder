@@ -109,6 +109,15 @@ namespace BrickBuilder
 					
 					CreateBrick(brickName, _brickPreview.transform.localPosition, _brickPreview.transform.rotation);
 				}
+
+				if (Keyboard.current.escapeKey.wasPressedThisFrame)
+				{
+					if (_brickPreview != null)
+					{
+						Destroy(_brickPreview.gameObject);
+						_brickPreview = null;
+					}
+				}
 			}
 		}
 
